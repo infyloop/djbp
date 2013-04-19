@@ -1,11 +1,8 @@
 from django.test import TestCase
-from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django_dynamic_fixture import G
-import json
-from urllib import urlencode
-
 from noteapp.models import Note
+
 
 class TestNoteListView(TestCase):
 
@@ -13,7 +10,7 @@ class TestNoteListView(TestCase):
 
     def setUp(self):
         self.note = G(Note)
-        
+
     def test_list_view(self):
         url = reverse('notes-list')
         response = self.client.get(url)
@@ -33,13 +30,14 @@ class TestNoteListView(TestCase):
     def test_create_view(self):
 
         url = reverse("notes-create")
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
         post = {"title": "title", "description": "some desc"}
         response = self.client.post(url, post)
         self.assertEquals(response.status_code, 302)
-        
 
     def test_note_view(self):
-        
+
         url = reverse('notes-view', kwargs={'pk': self.note.id})
         response = self.client.get(url)
         self.assertEquals(response.status_code, 200)
@@ -47,19 +45,19 @@ class TestNoteListView(TestCase):
         # test for the value of the context variable
         self.assertEquals(response.context_data['note'], self.note)
 
-        
     def test_delete_note_view(self):
-        url = reverse('notes-delete', kwargs={'pk':self.note.id})
+        url = reverse('notes-delete', kwargs={'pk': self.note.id})
         response = self.client.delete(url)
         self.assertEquals(Note.objects.count(), 0)
         self.assertEquals(response.status_code, 302)
 
-
     def test_update_note_view(self):
-        url = reverse('notes-edit', kwargs={'pk':self.note.id})
+        url = reverse('notes-edit', kwargs={'pk': self.note.id})
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
         post = {"title": "Hello", "description": "World"}
         response = self.client.post(url, post)
         self.assertEquals(response.status_code, 302)
         self.assertEquals(Note.objects.get(pk=self.note.id).title, "Hello")
-        self.assertEquals(Note.objects.get(pk=self.note.id).description, "World")
-    
+        self.assertEquals(Note.objects.get(
+            pk=self.note.id).description, "World")
