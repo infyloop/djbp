@@ -1,7 +1,6 @@
 A simple django note taking app. Written for a demo talk, with couple of best practices kept in mind. 
 
-
-[![Build Status](https://travis-ci.org/fruiapps/djbp.png?branch=master)](https://travis-ci.org/fruiapps/djbp)
+[![Build Status](https://travis-ci.org/fRuiApps/djbp.png?branch=master)](https://travis-ci.org/fRuiApps/djbp)
 
 You can get started with cloning the repo. 
 
@@ -18,6 +17,7 @@ running schemamigration - `pmp schemamigration noteapp --auto --settings=djnotes
 
 run the dev server - `python manage.py test noteapp --settings=djnotes.settings.local`
 
+run with coverage - `coverage run --source='.' manage.py test noteapp --settings=djnotes.settings.test`
 
 TODO : 
 
