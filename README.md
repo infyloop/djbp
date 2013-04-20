@@ -1,7 +1,7 @@
 A simple django note taking app. Written for a demo talk, with couple of best practices kept in mind. 
 
 
-[![Build Status](https://travis-ci.org/fruiapps/djbp.png?branch=master)](https://travis-ci.org/fruiapps/djbp)
+[![Build Status](https://travis-ci.org/fRuiApps/djbp.png?branch=master)](https://travis-ci.org/fRuiApps/djbp)
 
 You can get started with cloning the repo. 
 
